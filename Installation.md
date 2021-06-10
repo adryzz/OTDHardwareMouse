@@ -2,7 +2,7 @@
 ## Requirements
 * [The latest release of OTDHardwareMouse](https://github.com/adryzz/OTDHardwareMouse/releases/latest) installed. (currently not in the plugin manager)
 * [OpenTabletDriver](https://github.com/OpenTabletDriver/OpenTabletDriver) 0.6.0 or higher
-* A [supported hardware board]().
+* A [supported hardware board](https://github.com/adryzz/OTDHardwareMouse/blob/master/Supported-Boards.md).
 
 ## Installation process
 
