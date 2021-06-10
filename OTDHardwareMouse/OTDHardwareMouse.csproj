@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Ports" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="OpenTabletDriver.Plugin">
+      <HintPath>..\..\OpenTabletDriverDev\OpenTabletDriver.Plugin\bin\Debug\net5\OpenTabletDriver.Plugin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
