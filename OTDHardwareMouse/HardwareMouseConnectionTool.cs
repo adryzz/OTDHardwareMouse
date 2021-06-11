@@ -6,13 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
+using OpenTabletDriver.Plugin.Attributes;
 
 namespace OTDHardwareMouse
 {
+    [PluginName("Hardware Mouse connection")]
     class HardwareMouseConnectionTool : ITool
     {
         public static bool Connected { get; private set; } = false;
 
+        [Property("Port"), ToolTip("The serial port that will be used.")]
         public string PortName => portName;
 
         static string portName
@@ -21,6 +24,11 @@ namespace OTDHardwareMouse
             //TODO: re-initialize port on set
             set;
         }
+
+        [Property("Baud rate"), Unit("bps"), ToolTip("The speed of the connection.\nIf unsure, keep at the default.")]
+        public int BaudRate => baudRate;
+
+        static int baudRate = 115200;
 
         static SerialPort port;
 
@@ -33,7 +41,7 @@ namespace OTDHardwareMouse
         {
             try
             {
-                port = new SerialPort(portName, 115200, Parity.None, 8, StopBits.One);
+                port = new SerialPort(portName, baudRate, Parity.None, 8, StopBits.One);
                 port.Open();
                 Connected = true;
                 return true;

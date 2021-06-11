@@ -1,4 +1,5 @@
 ﻿using OpenTabletDriver.Plugin;
+using OpenTabletDriver.Plugin.Attributes;
 using OpenTabletDriver.Plugin.Tablet;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace OTDHardwareMouse
 {
+    [PluginName("Hardware mouse binding")]
     class HardwareMouseBinding : IBinding
     {
         public void Press(IDeviceReport report)
