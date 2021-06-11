@@ -16,7 +16,7 @@ namespace OTDHardwareMouse
         public static bool Connected { get; private set; } = false;
 
         [Property("Port"), ToolTip("The serial port that will be used.")]
-        public string PortName => portName;
+        public string PortName { get => portName; set => portName = value; }
 
         static string portName
         {
@@ -25,10 +25,13 @@ namespace OTDHardwareMouse
             set;
         }
 
-        [Property("Baud rate"), Unit("bps"), ToolTip("The speed of the connection.\nIf unsure, keep at the default.")]
-        public int BaudRate => baudRate;
+        [Property("Baud rate"), Unit("bps"), ToolTip("The speed of the connection.\nIf unsure, keep at the default."), DefaultPropertyValue(115200)]
+        public int BaudRate { get => baudRate; set => baudRate = value; }
 
         static int baudRate = 115200;
+
+        [Property("List ports in the console"), DefaultPropertyValue(true)]
+        public bool ListPortsInConsole { get; set; }
 
         static SerialPort port;
 
@@ -41,6 +44,25 @@ namespace OTDHardwareMouse
         {
             try
             {
+                if (ListPortsInConsole)
+                {
+                    string[] ports = SerialPort.GetPortNames();
+
+                    if (ports.Length > 0)
+                    {
+                        string message = "Available ports: ";
+                        for (int i = 0; i < ports.Length; i++)
+                        {
+                            message += ports[i] + ", ";
+                        }
+                        Log.Write("Plugin", message.Remove(message.Length - 3));
+                    }
+                    else
+                    {
+                        Log.Write("Plugin", "No available serial ports found.");
+                    }
+                }
+
                 port = new SerialPort(portName, baudRate, Parity.None, 8, StopBits.One);
                 port.Open();
                 Connected = true;
